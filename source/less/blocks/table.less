@@ -1,0 +1,162 @@
+.table {
+  background-color: @standart-white;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: @tablet-width) {
+    width: 860px;
+  }
+
+  @media (max-width: @mobile-width) {
+    width: 700px;
+  }
+}
+
+.teble__title {
+  font-family: "PT Sans", "Arial", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: purple;
+  margin-bottom: 15px;
+
+  @media (max-width: @tablet-width) {
+    text-align: left;
+  }
+}
+
+.table__head {
+  background-color: @table-head-color;
+}
+
+.table__body >.table__row {
+  color: @standart-black;
+
+  &:nth-child(even) {
+    background-color: @table-even-color;
+  }
+
+  &:nth-child(odd) {
+    background-color: @table-odd-color;
+  }
+}
+
+.table__item {
+  text-align: center;
+  vertical-align: baseline;
+  padding: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+
+
+  @media (max-width: @tablet-width) {
+    font-size: 17px;
+    padding: 15px;
+  }
+
+  @media (max-width: @mobile-width) {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  &--head {
+    color: @standart-black;
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  &--car {
+    font-size: 19px;
+    background-color: @table-car-color;
+    color: @standart-black;
+    text-transform: uppercase;
+    word-wrap: break-word;
+  }
+
+  &--buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @media (max-width: @tablet-width) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-row-gap: 15px;
+    }
+  }
+
+  &:nth-child(1) {
+    width: 25%;
+    text-align: left;
+  }
+
+  &:nth-child(2) {
+    width: 30%;
+  }
+
+  &:nth-child(3) {
+    width: 25%;
+  }
+
+  &:nth-child(4) {
+    text-align: right;
+  }
+}
+
+.table__button {
+  width: 85px;
+  padding: 10px 15px;
+
+  &:nth-child(n+2) {
+    margin-left: 10px;
+  }
+
+  &:nth-child(n+3) { //for new elements
+    margin-top: 10px;
+  }
+
+  @media (max-width: @tablet-width) {
+    justify-self: end;
+
+    &:nth-child(n+2) {
+      margin-left: 0;
+    }
+  }
+}
+
+.table__sort-button {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  background-image: url(../../img/down-dir.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+
+  @media (max-width: @mobile-width)  {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--upp {
+    transform: rotate(180deg);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

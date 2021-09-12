@@ -1,0 +1,23 @@
+.main {
+  flex-grow: 1;
+
+  display: grid;
+  grid-template-rows: min-content min-content;
+  grid-template-columns: 1fr;
+  grid-row-gap: 20px;
+
+  padding: 0 20px;
+  background-color: @body-bg-color;
+
+  --breakpoint:85%;
+  --breakpoint-offset: 0.5px;
+	text-align: center;
+	font-weight: bold;
+	background: linear-gradient(
+		176deg,
+		@body-bg-color calc(
+			var(--breakpoint)	- var(--breakpoint-offset)),
+		  @footer-bg-color calc(var(--breakpoint) + var(--breakpoint-offset)
+		)
+	);
+}
