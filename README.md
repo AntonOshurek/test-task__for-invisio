@@ -5,11 +5,11 @@
 ## Title
 ***This is a test task for invisio firm.***
 `what did i use?`
-**html5**
-**less**
-**javascript**
-**npm**
-**node.js**
+* **html5**
+* **less**
+* **javascript**
+* **npm**
+* **node.js**
 
 ---
 
