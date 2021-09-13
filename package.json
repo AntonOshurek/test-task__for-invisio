@@ -1,25 +1,22 @@
 {
-  "name": "test__task--invisio",
+  "name": "test-task__for-invisio",
   "version": "1.0.0",
   "description": "test task for invisio digital solutions",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "scripts": {
     "build": "gulp build",
     "start": "gulp"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonOshurek/Test__task--invisio.git"
+    "url": "git+https://github.com/AntonOshurek/test-task__for-invisio.git"
   },
-  "keywords": [
-    "invisio"
-  ],
   "author": "Anton Oshurek",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AntonOshurek/Test__task--invisio/issues"
+    "url": "https://github.com/AntonOshurek/test-task__for-invisio/issues"
   },
-  "homepage": "https://github.com/AntonOshurek/Test__task--invisio#readme",
+  "homepage": "https://github.com/AntonOshurek/test-task__for-invisio#readme",
   "devDependencies": {
     "browser-sync": "^2.27.5",
     "del": "^6.0.0",

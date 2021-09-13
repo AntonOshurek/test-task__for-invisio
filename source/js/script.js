@@ -202,6 +202,7 @@ function addEditCar(btnIndex) {
 function modalOpen() {
   modal.classList.remove('modal--hidden');
   body.classList.add('body--scrolloff');
+  modalInputBrand.focus();
   modalKeyOpt();
 };
 
