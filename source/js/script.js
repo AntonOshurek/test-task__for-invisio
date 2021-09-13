@@ -20,11 +20,19 @@ function checkStorage () {
 };
 checkStorage();
 
-absenceOfData(); //checking for the presence of data in the array
-
 function toStorage() {
   localStorage.setItem('tableList', JSON.stringify(tableList));
 };
+
+function absenceOfData() {
+  if(tableList.length <= 0) {
+    displayNoData();
+  } else {
+    displayTable();
+  }
+};
+
+absenceOfData(); //checking for the presence of data in the array
 
 addBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -49,14 +57,6 @@ addBtn.addEventListener('click', (e) => {
       displayTable();
   }
 });
-
-function absenceOfData() {
-  if(tableList.length <= 0) {
-    displayNoData();
-  } else {
-    displayTable();
-  }
-};
 
 function displayNoData() {
   let displayTable = `
@@ -155,7 +155,7 @@ function editTable() {
   const editBtn = document.querySelectorAll('.table__button--edit');
   editBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      modalOpen(e);
+      modalOpen();
 
       let btnIndex = e.target.getAttribute('data-edit-btn');
 
@@ -164,11 +164,9 @@ function editTable() {
       modalInputYear.value = tableList[btnIndex].year;
 
       addEditCar(btnIndex);
-      //console.log('edit btn');
     })
   })
 };
-
 
 function addEditCar(btnIndex) {
 
@@ -188,10 +186,8 @@ function addEditCar(btnIndex) {
           car: modalInputCar.value.toLowerCase(),
           year: modalInputYear.value.toLowerCase()
         }
-        //console.log(btnIndex);
+
         tableList[btnIndex] = newCar;
-        //console.log(tableList);
-        //console.log(tableList[btnIndex])
 
         toStorage();
         displayTable();
@@ -203,7 +199,7 @@ function addEditCar(btnIndex) {
 
 }
 
-function modalOpen(e) {
+function modalOpen() {
   modal.classList.remove('modal--hidden');
   body.classList.add('body--scrolloff');
   modalKeyOpt();
