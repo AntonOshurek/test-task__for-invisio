@@ -24,7 +24,7 @@ absenceOfData(); //checking for the presence of data in the array
 
 function toStorage() {
   localStorage.setItem('tableList', JSON.stringify(tableList));
-}
+};
 
 addBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -32,6 +32,7 @@ addBtn.addEventListener('click', (e) => {
       addInputs.forEach(input => {
         if (!input.value) {
           input.classList.add('add-block__input--error');
+          input.placeholder = 'enter a data!';
           setTimeout(() => (input.classList.remove('add-block__input--error')), 3000);
         }
       })
@@ -41,13 +42,13 @@ addBtn.addEventListener('click', (e) => {
         car: addCarInput.value.toLowerCase(),
         year: addYearInput.value.toLowerCase()
       }
-      
+
       tableList.push(newCar);
       toStorage();
       addForm.reset(); //reset all inputs in add form
       displayTable();
   }
-})
+});
 
 function absenceOfData() {
   if(tableList.length <= 0) {
@@ -55,7 +56,7 @@ function absenceOfData() {
   } else {
     displayTable();
   }
-}
+};
 
 function displayNoData() {
   let displayTable = `
@@ -70,7 +71,7 @@ function displayNoData() {
     </tr>
   `;
   tableBody.innerHTML = displayTable;
-}
+};
 
 function displayTable() {
   let displayTable = '';
@@ -82,18 +83,19 @@ function displayTable() {
         <td class="table__item">${item.car}</td>
         <td class="table__item"> ${item.year}</td>
         <td class="table__item table__item--buttons">
-          <button class="table__button standart-btn" type="button" data-edit-btn="${i}">edit</button>
-          <button class="table__button standart-btn" type="button" data-delete-btn="${i}">delete</button>
+          <button class="table__button standart-btn table__button--edit" type="button" data-edit-btn="${i}">edit</button>
+          <button class="table__button standart-btn table__button--delete" type="button" data-delete-btn="${i}">delete</button>
         </td>
       </tr>
     `;
     tableBody.innerHTML = displayTable;
   });
   deleteTableElem();
+  editTable();
 };
 
 function deleteTableElem() {
-  const tableDeleteBtn = document.querySelectorAll('.table__button');
+  const tableDeleteBtn = document.querySelectorAll('.table__button--delete');
 
   tableDeleteBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -103,7 +105,7 @@ function deleteTableElem() {
       absenceOfData();
     })
   })
-}
+};
 
 //sort logick
 
@@ -126,7 +128,7 @@ sortdownBtn.forEach(btn => {
     tableList.sort(sortDownCars(sortAttribute));
     displayTable();
   })
-})
+});
 
 function sortUpCars(field) {
   return (a, b) => a[field] > b[field] ? 1 : -1;
@@ -136,6 +138,88 @@ function sortDownCars(field) {
   return (a, b) => a[field] < b[field] ? 1 : -1;
 };
 
-/*tableList.sort(sortUpCars('brand'));
-tableList.forEach(item => console.log(item.brand))
-displayTable();*/
+//edit and modal logick
+
+const body = document.querySelector('.body');
+const modal = document.querySelector('.modal');
+const modalBg = document.querySelector('.modal__bg');
+const modalBtn = document.querySelector('.modal__button');
+
+//modal inputs
+const modalInputs = document.querySelectorAll('.modal__input');
+const modalInputBrand = document.querySelector('.modal__input--brand');
+const modalInputCar = document.querySelector('.modal__input--car');
+const modalInputYear = document.querySelector('.modal__input--year');
+
+function editTable() {
+  const editBtn = document.querySelectorAll('.table__button--edit');
+  editBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      modalOpen(e);
+
+      let btnIndex = e.target.getAttribute('data-edit-btn');
+
+      modalInputBrand.value = tableList[btnIndex].brand;
+      modalInputCar.value = tableList[btnIndex].car;
+      modalInputYear.value = tableList[btnIndex].year;
+
+      addEditCar(btnIndex);
+      //console.log('edit btn');
+    })
+  })
+};
+
+
+function addEditCar(btnIndex) {
+
+  modalBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!modalInputBrand.value || !modalInputCar.value || !modalInputYear.value) {
+        modalInputs.forEach(input => {
+          if (!input.value) {
+            input.classList.add('modal__input--error');
+            input.placeholder = 'enter a data!';
+            setTimeout(() => (input.classList.remove('modal__input--error')), 3000);
+          }
+        })
+    } else {
+        let newCar = {
+          brand: modalInputBrand.value.toLowerCase(),
+          car: modalInputCar.value.toLowerCase(),
+          year: modalInputYear.value.toLowerCase()
+        }
+        //console.log(btnIndex);
+        tableList[btnIndex] = newCar;
+        //console.log(tableList);
+        //console.log(tableList[btnIndex])
+
+        toStorage();
+        displayTable();
+        btnIndex ='';
+
+        modalClose();
+    }
+  });
+
+}
+
+function modalOpen(e) {
+  modal.classList.remove('modal--hidden');
+  body.classList.add('body--scrolloff');
+  modalKeyOpt();
+};
+
+function modalClose() {
+  modal.classList.add('modal--hidden');
+  body.classList.remove('body--scrolloff');
+};
+
+modalBg.addEventListener('click', () => modalClose());
+
+function modalKeyOpt () {
+  window.onkeydown = ( event ) => {
+      if ( event.keyCode == 27 ) {
+        modalClose(event);
+      }
+  };
+};
