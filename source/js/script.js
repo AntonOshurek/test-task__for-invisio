@@ -40,7 +40,7 @@ addBtn.addEventListener('click', (e) => {
       addInputs.forEach(input => {
         if (!input.value) {
           input.classList.add('add-block__input--error');
-          input.placeholder = 'enter a data!';
+          input.placeholder = 'Please enter a data';
           setTimeout(() => (input.classList.remove('add-block__input--error')), 3000);
         }
       })
@@ -144,6 +144,7 @@ const body = document.querySelector('.body');
 const modal = document.querySelector('.modal');
 const modalBg = document.querySelector('.modal__bg');
 const modalBtn = document.querySelector('.modal__button');
+const modalCloseBtn = document.querySelector('.modal__close-btn');
 
 //modal inputs
 const modalInputs = document.querySelectorAll('.modal__input');
@@ -176,7 +177,7 @@ function addEditCar(btnIndex) {
         modalInputs.forEach(input => {
           if (!input.value) {
             input.classList.add('modal__input--error');
-            input.placeholder = 'enter a data!';
+            input.placeholder = 'Please enter a data';
             setTimeout(() => (input.classList.remove('modal__input--error')), 3000);
           }
         })
@@ -206,12 +207,14 @@ function modalOpen() {
   modalKeyOpt();
 };
 
-function modalClose() {
+function modalClose(e) {
+  e.preventDefault();
   modal.classList.add('modal--hidden');
   body.classList.remove('body--scrolloff');
 };
 
-modalBg.addEventListener('click', () => modalClose());
+modalBg.addEventListener('click', (e) => modalClose(e));
+modalCloseBtn.addEventListener('click', (e) => modalClose(e));
 
 function modalKeyOpt () {
   window.onkeydown = ( event ) => {
