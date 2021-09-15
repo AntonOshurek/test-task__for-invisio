@@ -207,14 +207,13 @@ function modalOpen() {
   modalKeyOpt();
 };
 
-function modalClose(e) {
-  e.preventDefault();
+function modalClose() {
   modal.classList.add('modal--hidden');
   body.classList.remove('body--scrolloff');
 };
 
-modalBg.addEventListener('click', (e) => modalClose(e));
-modalCloseBtn.addEventListener('click', (e) => modalClose(e));
+modalBg.addEventListener('click', () => modalClose());
+modalCloseBtn.addEventListener('click', () => modalClose());
 
 function modalKeyOpt () {
   window.onkeydown = ( event ) => {
